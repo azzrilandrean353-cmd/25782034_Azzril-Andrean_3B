@@ -1,0 +1,117 @@
+/*
+ * style.css — Sales Dashboard 2023
+ * ==================================
+ * Complementary styles for reusable component classes used throughout
+ * index.html. Tailwind handles the heavy lifting; this file handles
+ * repeating card/filter patterns and a few custom tweaks.
+ */
+
+/* ─── FONT IMPORT ────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar          { width: 6px; height: 6px; }
+::-webkit-scrollbar-track    { background: #f1f5f9; }
+::-webkit-scrollbar-thumb    { background: #cbd5e1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── KPI CARD ───────────────────────────────────────────────────────────── */
+.kpi-card {
+  @apply flex items-center gap-3 bg-white rounded-2xl shadow-sm border border-gray-100 p-4
+         hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default;
+}
+
+.kpi-icon {
+  @apply w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-200;
+}
+
+.kpi-label {
+  @apply text-xs font-medium text-gray-500 uppercase tracking-wide mb-0.5;
+}
+
+.kpi-value {
+  @apply text-xl sm:text-2xl font-bold text-gray-900 truncate;
+}
+
+/* ─── CHART CARD ─────────────────────────────────────────────────────────── */
+.chart-card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-4
+         hover:shadow-md transition-shadow duration-200;
+}
+
+.chart-header {
+  @apply mb-3 pb-2 border-b border-gray-50;
+}
+
+.chart-title {
+  @apply text-sm font-semibold text-gray-800;
+}
+
+.chart-subtitle {
+  @apply text-xs text-gray-400 mt-0.5;
+}
+
+/* Default chart body — tall enough for bar/line/scatter */
+.chart-body {
+  @apply relative;
+  height: 280px;
+}
+
+/* Smaller body for pie/doughnut charts */
+.chart-body--sm {
+  height: 220px;
+}
+
+/* Medium body for single full-width charts */
+.chart-body--md {
+  height: 180px;
+}
+
+/* ─── FILTER COMPONENTS ──────────────────────────────────────────────────── */
+.filter-group {
+  @apply flex flex-col gap-0.5;
+}
+
+.filter-label {
+  @apply text-[10px] font-semibold uppercase tracking-wider text-gray-400 px-0.5;
+}
+
+.filter-select {
+  @apply text-sm bg-gray-50 border border-gray-200 text-gray-700
+         rounded-lg px-3 py-1.5
+         hover:border-indigo-300 hover:bg-white
+         focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400
+         transition-colors duration-150 cursor-pointer;
+  min-width: 130px;
+}
+
+/* ─── RESPONSIVE TWEAKS ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .kpi-value {
+    @apply text-lg;
+  }
+
+  .chart-body {
+    height: 220px;
+  }
+
+  .chart-body--sm {
+    height: 200px;
+  }
+}
+
+/* ─── LOADING STATE ──────────────────────────────────────────────────────── */
+/* Canvas gets a subtle pulse while data is being fetched */
+canvas {
+  animation: fadeIn 0.35s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
